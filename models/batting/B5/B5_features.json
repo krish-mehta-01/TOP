@@ -1,0 +1,21 @@
+{
+  "features": [
+    "over",
+    "ball_in_over",
+    "current_score",
+    "current_run_rate",
+    "balls_remaining",
+    "wickets_lost",
+    "wickets_remaining",
+    "recent_runs",
+    "recent_wickets",
+    "previous_runs",
+    "dot_streak",
+    "boundary_momentum",
+    "pressure_index",
+    "momentum",
+    "is_powerplay",
+    "is_middle_overs",
+    "is_death_overs"
+  ]
+}

@@ -1,0 +1,166 @@
+{
+  "B1": {
+    "role": "batting",
+    "label": "Run Projection",
+    "column": "b1_predicted_score",
+    "type": "regression",
+    "csv": "B1/B1_results.csv",
+    "metrics": {
+      "MAE": 18.360659134072506,
+      "RMSE": 24.7546458505931,
+      "R2": 0.3577341314012842
+    }
+  },
+  "B2": {
+    "role": "batting",
+    "label": "Dismissal Risk",
+    "column": "b2_predicted_risk",
+    "type": "raw_signed",
+    "csv": "B2/B2_results.csv",
+    "metrics": {
+      "pct_flagged_high_risk": 0.9372503099600495,
+      "pct_actually_dismissed": 0.9054449648711944
+    }
+  },
+  "B3": {
+    "role": "batting",
+    "label": "Shot Aggression",
+    "column": "b3_predicted_class",
+    "type": "class_0_1_2",
+    "csv": "B3/B3_results.csv",
+    "metrics": {
+      "Accuracy": 0.4523866923818708
+    }
+  },
+  "B5": {
+    "role": "batting",
+    "label": "Strike Rotation",
+    "column": "b5_predicted_prob",
+    "type": "probability",
+    "csv": "B5/B5_results.csv",
+    "metrics": {
+      "Accuracy": 0.6723033475685356,
+      "Precision": 0.5518836042830209,
+      "Recall": 0.70688476784982,
+      "F1": 0.6198409844580287,
+      "ROC_AUC": 0.749051937169176
+    }
+  },
+  "B6": {
+    "role": "batting",
+    "label": "Partnership Stability",
+    "column": "b6_predicted_score",
+    "type": "regression",
+    "csv": "B6/B6_results.csv",
+    "metrics": {
+      "MAE": 10.059610396286324,
+      "RMSE": 13.905247976808703,
+      "R2": 0.5111622708690231
+    }
+  },
+  "B8": {
+    "role": "batting",
+    "label": "Powerplay Exploitation",
+    "column": "b8_predicted_prob",
+    "type": "probability",
+    "csv": "B8/B8_results.csv",
+    "metrics": {
+      "Accuracy": 0.44606445954834467,
+      "Precision": 0.22207969899093552,
+      "Recall": 0.7201885745978924,
+      "F1": 0.3394771241830065,
+      "ROC_AUC": 0.5649718039123056
+    }
+  },
+  "B9": {
+    "role": "batting",
+    "label": "Spin Vulnerability",
+    "column": "b9_predicted_prob",
+    "type": "probability",
+    "csv": "B9/B9_results.csv",
+    "metrics": {
+      "Accuracy": 0.7054001928640309,
+      "Precision": 0.07609150092576002,
+      "Recall": 0.4373498111912118,
+      "F1": 0.12962962962962962,
+      "ROC_AUC": 0.602223807419959
+    },
+    "note": "Dataset has no bowler-type (pace/spin) field - this measures general phase-based wicket probability, not spin-specific vulnerability."
+  },
+  "B10": {
+    "role": "batting",
+    "label": "Scoring Velocity",
+    "column": "b10_predicted_next6",
+    "type": "regression",
+    "csv": "B10/B10_results.csv",
+    "metrics": {
+      "MAE": 3.430445645838615,
+      "RMSE": 4.325333183506097,
+      "R2": 0.05614027568792557
+    }
+  },
+  "B11": {
+    "role": "batting",
+    "label": "Targeted Run-Rate",
+    "column": "b11_predicted_final_score",
+    "type": "regression",
+    "csv": "B11/B11_results.csv",
+    "metrics": {
+      "MAE": 4.396142083568988,
+      "RMSE": 5.927924853451457,
+      "R2": 0.47034716954697153
+    }
+  },
+  "B12": {
+    "role": "batting",
+    "label": "Gap Analysis",
+    "column": "b12_predicted_prob",
+    "type": "probability",
+    "csv": "B12/B12_results.csv",
+    "metrics": {
+      "Accuracy": 0.5437043669926988,
+      "Precision": 0.47956877064858283,
+      "Recall": 0.4316456686751702,
+      "F1": 0.45434702030394136,
+      "ROC_AUC": 0.5458991743962281
+    }
+  },
+  "B13": {
+    "role": "batting",
+    "label": "Wicket-Loss Mitigation",
+    "column": "b13_predicted_prob",
+    "type": "probability",
+    "csv": "B13/B13_results.csv",
+    "metrics": {
+      "Accuracy": 0.7070533131285301,
+      "Precision": 0.10215023421186298,
+      "Recall": 0.6213525575008583,
+      "F1": 0.17545560294687865,
+      "ROC_AUC": 0.7350058860205941
+    }
+  },
+  "B14": {
+    "role": "batting",
+    "label": "Acceleration Capability",
+    "column": "b14_predicted_runs",
+    "type": "regression",
+    "csv": "B14/B14_results.csv",
+    "metrics": {
+      "MAE": 1.2503791923745442,
+      "RMSE": 1.6697385306255026,
+      "R2": 0.1486666578755822
+    }
+  },
+  "B15": {
+    "role": "batting",
+    "label": "Death-Over Optimization",
+    "column": "b15_predicted_remaining",
+    "type": "regression",
+    "csv": "B15/B15_results.csv",
+    "metrics": {
+      "MAE": 8.066084861755371,
+      "RMSE": 10.959059387831404,
+      "R2": 0.5868222117424011
+    }
+  }
+}

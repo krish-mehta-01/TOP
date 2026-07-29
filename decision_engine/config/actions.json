@@ -1,0 +1,49 @@
+{
+  "bowling": {
+    "change_bowler": "Make a bowling change",
+    "maintain_current_bowler": "Continue with the current bowler",
+    "bring_spinner": "Bring on a spinner",
+    "bowl_yorkers_death": "Bowl yorkers / death-over lines",
+    "use_variations": "Use variations (slower balls, cutters)",
+    "defensive_field": "Set a defensive field",
+    "attacking_field": "Set an attacking field",
+    "target_matchup": "Target the favourable bowler-batter matchup"
+  },
+  "batting": {
+    "accelerate": "Accelerate the scoring rate",
+    "rotate_strike": "Focus on rotating strike",
+    "defend_wicket": "Play cautiously and protect the wicket",
+    "target_boundaries": "Look to target boundaries",
+    "build_partnership": "Focus on building the partnership"
+  },
+  "rules": {
+    "bowling": [
+      {
+        "id": "no_attack_if_high_wicket_risk_already_taken",
+        "description": "Do not recommend an attacking field if the last over already conceded a wicket and containment models disagree.",
+        "blocks": "attacking_field",
+        "condition": "recent_wicket_and_low_containment_confidence"
+      },
+      {
+        "id": "no_bowler_change_below_min_overs",
+        "description": "Do not recommend changing the bowler if they have bowled fewer than 2 overs (min spell rule), unless economy signal is extreme.",
+        "blocks": "change_bowler",
+        "condition": "overs_bowled_below_minimum"
+      }
+    ],
+    "batting": [
+      {
+        "id": "no_accelerate_if_new_batter",
+        "description": "Do not recommend aggressive acceleration for a batter who has faced very few balls (still assessing the pitch).",
+        "blocks": "accelerate",
+        "condition": "balls_faced_below_minimum"
+      },
+      {
+        "id": "no_defend_in_death_overs_if_far_behind_rate",
+        "description": "Do not recommend pure defense in death overs if the required run rate is far above the projected rate.",
+        "blocks": "defend_wicket",
+        "condition": "death_overs_and_rate_gap_high"
+      }
+    ]
+  }
+}

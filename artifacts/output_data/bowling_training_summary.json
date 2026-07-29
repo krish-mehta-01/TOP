@@ -1,0 +1,204 @@
+{
+  "W1": {
+    "role": "bowling",
+    "label": "Economy Predictor",
+    "column": "w1_predicted_economy",
+    "type": "regression",
+    "csv": "W1/W1_results.csv",
+    "metrics": {
+      "MAE": 1.2651175940466355,
+      "RMSE": 1.791896591288417,
+      "R2": 0.6475369263807533
+    }
+  },
+  "W2": {
+    "role": "bowling",
+    "label": "Wicket Probability Predictor",
+    "column": "w2_predicted_wicket_prob",
+    "type": "probability",
+    "csv": "W2/W2_results.csv",
+    "metrics": {
+      "Accuracy": 0.5682758620689655,
+      "Precision": 0.5006105006105006,
+      "Recall": 0.6539074960127592,
+      "F1": 0.5670816044260027,
+      "ROC_AUC": 0.6073357479637457
+    }
+  },
+  "W3": {
+    "role": "bowling",
+    "label": "Dot Ball Pressure",
+    "column": "w3_predicted_dot_pct",
+    "type": "regression",
+    "csv": "W3/W3_results.csv",
+    "metrics": {
+      "MAE": 0.056067995440193995,
+      "RMSE": 0.07646590170948539,
+      "R2": 0.6816619317295802
+    }
+  },
+  "W4": {
+    "role": "bowling",
+    "label": "Variation Control",
+    "column": "w4_predicted_prob",
+    "type": "probability",
+    "csv": "W4/W4_results.csv",
+    "metrics": {
+      "Accuracy": 0.6662068965517242,
+      "Precision": 0.6208955223880597,
+      "Recall": 0.6439628482972136,
+      "F1": 0.6322188449848024,
+      "ROC_AUC": 0.7402134066509558
+    }
+  },
+  "W5": {
+    "role": "bowling",
+    "label": "Bowling Change Optimization",
+    "column": "optimization_score",
+    "type": "raw_signed_formula",
+    "csv": "W5/W5_results.csv",
+    "metrics": {
+      "mean": 1.0968416801271803,
+      "std": 3.286095013338845,
+      "n": 9420
+    }
+  },
+  "W6": {
+    "role": "bowling",
+    "label": "Line & Length Consistency",
+    "column": "w6_predicted_prob",
+    "type": "probability",
+    "csv": "W6/W6_results.csv",
+    "metrics": {
+      "Accuracy": 0.5544827586206896,
+      "Precision": 0.6832971800433839,
+      "Recall": 0.38650306748466257,
+      "F1": 0.493730407523511,
+      "ROC_AUC": 0.5864808463359258
+    }
+  },
+  "W7": {
+    "role": "bowling",
+    "label": "Spin Control",
+    "column": "w7_predicted_prob",
+    "type": "probability",
+    "csv": "W7/W7_results.csv",
+    "metrics": {
+      "Accuracy": 0.7144827586206897,
+      "Precision": 0.6330827067669172,
+      "Recall": 0.7123519458544839,
+      "F1": 0.6703821656050956,
+      "ROC_AUC": 0.7824744075371945
+    },
+    "note": "Dataset has no bowler-type (pace/spin) field, so this measures dot-ball control generally - it cannot actually condition on spin bowling specifically."
+  },
+  "W8": {
+    "role": "bowling",
+    "label": "Yorker Effectiveness",
+    "column": "w8_predicted_prob",
+    "type": "probability",
+    "csv": "W8/W8_results.csv",
+    "metrics": {
+      "Accuracy": 0.7,
+      "Precision": 0.7339901477832512,
+      "Recall": 0.7312883435582822,
+      "F1": 0.7326367547633682,
+      "ROC_AUC": 0.7548504903144776
+    },
+    "note": "Dataset has no delivery-type field, so this cannot verify yorkers specifically - it measures general future boundary-prevention."
+  },
+  "W9": {
+    "role": "bowling",
+    "label": "Death Over Accuracy",
+    "column": "w9_predicted_prob",
+    "type": "probability",
+    "csv": "W9/W9_results.csv",
+    "metrics": {
+      "Accuracy": 0.642023346303502,
+      "Precision": 0.49382716049382713,
+      "Recall": 0.43956043956043955,
+      "F1": 0.46511627906976744,
+      "ROC_AUC": 0.6500728187475175
+    },
+    "note": "Differentiated from W15 by phase (over=15) only - the dataset has no delivery-type field, so this can't model death-over-specific tactics (yorkers, slower balls) beyond 'is the bowler in good economy/boundary form'."
+  },
+  "W10": {
+    "role": "bowling",
+    "label": "Field-Set Optimization",
+    "column": "optimization_score",
+    "type": "raw_signed_formula",
+    "csv": "W10/W10_results.csv",
+    "metrics": {
+      "mean": -2.0952515911970275,
+      "std": 1.9463673649723001,
+      "n": 9420
+    }
+  },
+  "W11": {
+    "role": "bowling",
+    "label": "Run-Containment",
+    "column": "w11_predicted_future_runs",
+    "type": "regression",
+    "csv": "W11/W11_results.csv",
+    "metrics": {
+      "MAE": 6.036979226472788,
+      "RMSE": 7.833394885265985,
+      "R2": 0.26637049475605823
+    }
+  },
+  "W12": {
+    "role": "bowling",
+    "label": "Bowler Form / Baseline",
+    "column": "career_economy",
+    "type": "lookup",
+    "csv": "W12/W12_results.csv",
+    "metrics": {
+      "n_bowlers_in_lookup": 557,
+      "n_test_snapshots": 1463,
+      "correlation_career_economy_vs_future_economy": 0.13432042007338751
+    }
+  },
+  "W13": {
+    "role": "bowling",
+    "label": "L/R Matchup Bias",
+    "column": "w13_predicted_prob",
+    "type": "probability",
+    "csv": "W13/W13_results.csv",
+    "metrics": {
+      "Accuracy": 0.62,
+      "Precision": 0.2980599647266314,
+      "Recall": 0.5248447204968945,
+      "F1": 0.38020247469066365,
+      "ROC_AUC": 0.6220458349852429
+    },
+    "note": "Dataset has no batter handedness field, so this measures general spell-improvement + wicket-taking bias, not literal left/right-handed matchups."
+  },
+  "W14": {
+    "role": "bowling",
+    "label": "Economy Trend Analysis",
+    "column": "w14_predicted_future_economy",
+    "type": "regression",
+    "csv": "W14/W14_results.csv",
+    "metrics": {
+      "MAE": 4.145774741695807,
+      "RMSE": 5.6075789292059275,
+      "R2": -0.12440514322662644,
+      "prediction_std": 2.274674375990981
+    }
+  },
+  "W15": {
+    "role": "bowling",
+    "label": "Powerplay Containment",
+    "column": "w15_predicted_prob",
+    "type": "probability",
+    "csv": "W15/W15_results.csv",
+    "metrics": {
+      "Accuracy": 0.7098214285714286,
+      "Precision": 0.7070707070707071,
+      "Recall": 0.660377358490566,
+      "F1": 0.6829268292682927,
+      "ROC_AUC": 0.7723656859609851
+    },
+    "note": "Differentiated from W9 by phase (over=5) only - same dataset limitation as W9 applies (no delivery-type field)."
+  }
+}

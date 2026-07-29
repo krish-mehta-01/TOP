@@ -1,0 +1,9 @@
+{
+  "categorical_features": [
+    "venue",
+    "batting_team",
+    "bowling_team",
+    "innings",
+    "match_phase"
+  ]
+}
