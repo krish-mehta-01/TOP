@@ -2,6 +2,7 @@ import { useState } from 'react';
 import MomentumChart from './MomentumChart';
 import OverTimeline from './OverTimeline';
 import { Plus, Play, Trash2, MapPin, Users, Target } from 'lucide-react';
+import rosterData from '../data/roster.json';
 
 export default function ScorecardPanel({ 
   role, 
@@ -83,7 +84,12 @@ export default function ScorecardPanel({
       <div className="panel-body">
 
         <div className="field-row">
-          <div className="field"><label><MapPin size={12} style={{display:'inline', marginBottom:'-2px'}}/> Venue</label><input id="venue" value={matchState.venue} onChange={handleMatchStateChange} /></div>
+          <div className="field">
+            <label><MapPin size={12} style={{display:'inline', marginBottom:'-2px'}}/> Venue</label>
+            <select id="venue" value={matchState.venue} onChange={handleMatchStateChange}>
+              {rosterData.venues.map(v => <option key={v} value={v}>{v}</option>)}
+            </select>
+          </div>
           <div className="field"><label>Innings</label>
             <select id="innings" value={matchState.innings} onChange={handleMatchStateChange}>
               <option value="1">1st</option>
@@ -92,20 +98,51 @@ export default function ScorecardPanel({
           </div>
         </div>
         <div className="field-row">
-          <div className="field"><label><Users size={12} style={{display:'inline', marginBottom:'-2px'}}/> Batting team</label><input id="batting_team" value={matchState.batting_team} onChange={handleMatchStateChange} /></div>
-          <div className="field"><label><Users size={12} style={{display:'inline', marginBottom:'-2px'}}/> Bowling team</label><input id="bowling_team" value={matchState.bowling_team} onChange={handleMatchStateChange} /></div>
+          <div className="field">
+            <label><Users size={12} style={{display:'inline', marginBottom:'-2px'}}/> Batting team</label>
+            <select id="batting_team" value={matchState.batting_team} onChange={handleMatchStateChange}>
+              {rosterData.teams.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
+          <div className="field">
+            <label><Users size={12} style={{display:'inline', marginBottom:'-2px'}}/> Bowling team</label>
+            <select id="bowling_team" value={matchState.bowling_team} onChange={handleMatchStateChange}>
+              {rosterData.teams.map(t => <option key={t} value={t}>{t}</option>)}
+            </select>
+          </div>
         </div>
         <div className="field" style={{ display: role === 'bowling' ? 'flex' : 'none' }}>
-          <label>Current bowler</label><input id="current_bowler" value={matchState.current_bowler} onChange={handleMatchStateChange} />
+          <label>Current bowler</label>
+          <select id="current_bowler" value={matchState.current_bowler} onChange={handleMatchStateChange}>
+            {rosterData.roster[matchState.bowling_team]?.bowlers.map(p => <option key={p} value={p}>{p}</option>)}
+          </select>
         </div>
 
         <div className="subhead"><Play size={14} /> Add a ball</div>
         <div className="ball-form">
           <div className="field"><label>Over</label><input type="number" id="b_over" min="0" max="19" value={ballInput.b_over} onChange={handleInputChange} /></div>
           <div className="field"><label>Ball</label><input type="number" id="b_ball" min="1" max="9" value={ballInput.b_ball} onChange={handleInputChange} /></div>
-          <div className="field wide-field"><label>Batter</label><input id="b_batter" value={ballInput.b_batter} onChange={handleInputChange} /></div>
-          <div className="field wide-field"><label>Non-striker</label><input id="b_nonstriker" value={ballInput.b_nonstriker} onChange={handleInputChange} /></div>
-          <div className="field wide-field"><label>Bowler</label><input id="b_bowler" value={ballInput.b_bowler} onChange={handleInputChange} /></div>
+          <div className="field wide-field">
+            <label>Batter</label>
+            <select id="b_batter" value={ballInput.b_batter} onChange={handleInputChange}>
+              <option value="">-- Select --</option>
+              {rosterData.roster[matchState.batting_team]?.batters.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <div className="field wide-field">
+            <label>Non-striker</label>
+            <select id="b_nonstriker" value={ballInput.b_nonstriker} onChange={handleInputChange}>
+              <option value="">-- Select --</option>
+              {rosterData.roster[matchState.batting_team]?.batters.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
+          <div className="field wide-field">
+            <label>Bowler</label>
+            <select id="b_bowler" value={ballInput.b_bowler} onChange={handleInputChange}>
+              <option value="">-- Select --</option>
+              {rosterData.roster[matchState.bowling_team]?.bowlers.map(p => <option key={p} value={p}>{p}</option>)}
+            </select>
+          </div>
           <div className="field"><label>Runs</label><input type="number" id="b_runs" min="0" max="6" value={ballInput.b_runs} onChange={handleInputChange} /></div>
           <div className="field"><label>Wide</label><input type="number" id="b_wide" min="0" value={ballInput.b_wide} onChange={handleInputChange} /></div>
           <div className="field"><label>No-ball</label><input type="number" id="b_nb" min="0" value={ballInput.b_nb} onChange={handleInputChange} /></div>

@@ -16,8 +16,8 @@ function App() {
   const [matchState, setMatchState] = useState({
     venue: "M Chinnaswamy Stadium, Bengaluru",
     innings: "1",
-    batting_team: "RCB",
-    bowling_team: "MI",
+    batting_team: "Royal Challengers Bengaluru",
+    bowling_team: "Mumbai Indians",
     current_bowler: "JJ Bumrah"
   });
 
