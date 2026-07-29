@@ -51,6 +51,11 @@ export default function RecommendationConsole({ error, recommendation, role }) {
   const { text, phase, chosen, audit, contributions } = recommendation;
   const conf = confidenceFromText(text);
 
+  const alternatives = audit
+    .filter(a => !a.chosen && !a.blocked_by && a.score > -2.0)
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 2);
+
   return (
     <div className="panel">
       <div className="panel-head"><Cpu size={16}/> <h2>Decision Engine Output</h2></div>
@@ -65,6 +70,20 @@ export default function RecommendationConsole({ error, recommendation, role }) {
             </div>
           )}
           <div className="rec-note">{text}</div>
+          
+          {alternatives.length > 0 && (
+            <div style={{marginTop: '12px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.1)'}}>
+              <div style={{fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '4px'}}>Alternative Options:</div>
+              {alternatives.map((alt, idx) => (
+                <div key={idx} style={{fontSize: '0.875rem', color: 'var(--text-light)', display: 'flex', justifyContent: 'space-between'}}>
+                  <span>{actionLabel(alt.action)}</span>
+                  <span style={{color: alt.score > 0 ? '#10b981' : 'var(--text-muted)'}}>
+                    {alt.score > 0 ? `+${alt.score.toFixed(2)}` : alt.score.toFixed(2)} score
+                  </span>
+                </div>
+              ))}
+            </div>
+          )}
         </div>
         <div className="signal-readout">
           {audit.map((row, i) => {
