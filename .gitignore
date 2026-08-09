@@ -1,0 +1,21 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+
+# CatBoost's per-run training log directory - regenerated every time any
+# CatBoost model trains, not meaningful source or output content.
+catboost_info/
+
+# Node / frontend build
+node_modules/
+frontend/dist/
+
+# OS cruft
+.DS_Store
+Thumbs.db
+
+# Editor
+.vscode/
+.idea/
