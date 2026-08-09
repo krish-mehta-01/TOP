@@ -72,11 +72,16 @@ def api_recommend(req: RecommendRequest):
     except Exception as e:  # keep the demo debuggable - surface the real error
         raise HTTPException(status_code=500, detail=f"{type(e).__name__}: {e}")
 
+    n_signals = result["n_signals"]
+    n_models_total = max(result["n_models_total"], 1)
+    confidence = round(100 * n_signals / n_models_total)
+
     return {
         "role": result["role"],
         "phase": result["phase"],
         "text": result["text"],
         "chosen": result["chosen"],
+        "confidence": confidence,
         "ranked_actions": result["ranked_actions"],
         "blocked": result["blocked"],
         "audit": result["audit"],

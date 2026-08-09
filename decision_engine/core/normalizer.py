@@ -1,7 +1,7 @@
 """
 Normalizer
 ----------
-Every one of the 30 models outputs a single raw scalar in its last column,
+Every one of the models outputs a single raw scalar in its last column,
 but those scalars live on totally different scales:
 
   - regression models   -> unbounded continuous values (economy, runs, score...)

@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 300" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arrow2" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555555"/>
+    </marker>
+  </defs>
+
+  <g font-size="14.5" text-anchor="middle">
+    <!-- 1 Raw outputs -->
+    <rect x="15" y="80" width="230" height="130" rx="9" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
+    <text x="130" y="118" font-weight="bold" fill="#222">Raw Model</text>
+    <text x="130" y="138" font-weight="bold" fill="#222">Outputs</text>
+    <text x="130" y="165" font-size="12.5" fill="#444">~15 scalars</text>
+    <text x="130" y="182" font-size="12.5" fill="#444">(role-relevant models)</text>
+
+    <!-- 2 Normalizer -->
+    <rect x="270" y="80" width="230" height="130" rx="9" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="385" y="118" font-weight="bold" fill="#1f3d5c">Normalizer</text>
+    <text x="385" y="145" font-size="12.5" fill="#333">probability &#8594; (p&#8722;0.5)&#215;2</text>
+    <text x="385" y="163" font-size="12.5" fill="#333">regression &#8594; clip(z/2,&#8722;1,1)</text>
+    <text x="385" y="181" font-size="12.5" fill="#333">formula &#8594; tanh(x/&#963;)</text>
+
+    <!-- 3 Weighter -->
+    <rect x="525" y="80" width="230" height="130" rx="9" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="640" y="118" font-weight="bold" fill="#1f3d5c">Weighter</text>
+    <text x="640" y="148" font-size="12.5" fill="#333">weight = phase mult.</text>
+    <text x="640" y="166" font-size="12.5" fill="#333">&#215; reliability score</text>
+    <text x="640" y="188" font-size="11.5" fill="#666">(Table I, II)</text>
+
+    <!-- 4 Aggregator -->
+    <rect x="780" y="80" width="250" height="130" rx="9" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="905" y="118" font-weight="bold" fill="#1f3d5c">Aggregator</text>
+    <text x="905" y="148" font-size="12.5" fill="#333">score(action) += signal &#215;</text>
+    <text x="905" y="166" font-size="12.5" fill="#333">direction &#215; weight</text>
+    <text x="905" y="188" font-size="11.5" fill="#666">summed over all firing models</text>
+
+    <!-- 5 RuleValidator -->
+    <rect x="1055" y="80" width="240" height="130" rx="9" fill="#fbeee2" stroke="#d0793a" stroke-width="2"/>
+    <text x="1175" y="118" font-weight="bold" fill="#7a3f16">RuleValidator</text>
+    <text x="1175" y="148" font-size="12.5" fill="#333">skips ranked actions</text>
+    <text x="1175" y="166" font-size="12.5" fill="#333">that break a hard rule</text>
+    <text x="1175" y="188" font-size="11.5" fill="#666">(Appendix B)</text>
+
+    <!-- 6 TextGenerator -->
+    <rect x="1320" y="80" width="260" height="130" rx="9" fill="#eaf3ec" stroke="#3a8f5a" stroke-width="2"/>
+    <text x="1450" y="118" font-weight="bold" fill="#1f5c37">TextGenerator</text>
+    <text x="1450" y="148" font-size="12.5" fill="#333">chosen action &#8594;</text>
+    <text x="1450" y="166" font-size="12.5" fill="#333">coach-readable plan</text>
+    <text x="1450" y="188" font-size="11.5" fill="#666">+ coverage caveat</text>
+  </g>
+
+  <g stroke="#555555" stroke-width="2.2" marker-end="url(#arrow2)">
+    <line x1="247" y1="145" x2="268" y2="145"/>
+    <line x1="502" y1="145" x2="523" y2="145"/>
+    <line x1="757" y1="145" x2="778" y2="145"/>
+    <line x1="1032" y1="145" x2="1053" y2="145"/>
+    <line x1="1297" y1="145" x2="1318" y2="145"/>
+  </g>
+
+  <text x="800" y="255" text-anchor="middle" font-size="13.5" fill="#444">
+    Fig. 6. Decision-engine internals: every model that fired for the current context is normalized, weighted, aggregated per candidate action, rule-checked, then rendered as text.
+  </text>
+  <text x="800" y="277" text-anchor="middle" font-size="12" fill="#777">
+    An audit record of every ranked action's score and blocked/unblocked status is retained alongside the chosen output (not shown) for the trail described in Section VII-D.
+  </text>
+</svg>

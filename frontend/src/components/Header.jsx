@@ -3,21 +3,21 @@ import { Activity, Server } from 'lucide-react';
 export default function Header({ status }) {
   const isLive = status === 'live';
   return (
-    <header>
-      <div className="brand">
-        <div className="mark" style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-          <Activity size={18} /> TOP
+    <div style={{ display: 'flex', flexDirection: 'column', gap: '12px', paddingBottom: '16px', borderBottom: '1px solid var(--border)', marginBottom: '16px' }}>
+      <div className="brand" style={{ display: 'flex', alignItems: 'center', gap: '12px' }}>
+        <div className="mark" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '14px', padding: '6px 10px' }}>
+          <Activity size={16} /> TOP
         </div>
         <div>
-          <h1>Tactical Console</h1>
-          <p>Live timeout decision support — 28 retrained models, one recommendation</p>
+          <h1 style={{ fontSize: '18px', margin: 0 }}>Tactical Console</h1>
+          <p style={{ fontSize: '11px', margin: 0, color: 'var(--text-dim)' }}>Live decision support</p>
         </div>
       </div>
-      <div className="status">
-        <Server size={14} />
+      <div className="status" style={{ display: 'flex', alignItems: 'center', gap: '8px', fontSize: '11px' }}>
+        <Server size={12} />
         <span className={`dot ${isLive ? 'live' : 'down'}`}></span>
-        <span>{isLive ? 'backend connected' : 'backend unreachable — start: uvicorn app:app --port 8000'}</span>
+        <span>{isLive ? 'Backend connected' : 'Backend offline'}</span>
       </div>
-    </header>
+    </div>
   );
 }

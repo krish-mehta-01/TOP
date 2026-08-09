@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 480" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arrA" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555555"/>
+    </marker>
+  </defs>
+
+  <text x="750" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Same dataset, same algorithms, same match-level split — different row selection</text>
+
+  <!-- shared input -->
+  <rect x="575" y="55" width="350" height="70" rx="8" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
+  <text x="750" y="83" text-anchor="middle" font-size="14" font-weight="bold" fill="#222">Full ball-by-ball dataset</text>
+  <text x="750" y="103" text-anchor="middle" font-size="12.5" fill="#444">288,226 deliveries, 1,212 matches</text>
+
+  <g stroke="#555" stroke-width="2.2" marker-end="url(#arrA)">
+    <line x1="700" y1="125" x2="500" y2="165"/>
+    <line x1="800" y1="125" x2="1000" y2="165"/>
+  </g>
+
+  <!-- Left: checkpoint-restricted baseline -->
+  <rect x="60" y="165" width="620" height="130" rx="8" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+  <text x="370" y="192" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#1f3d5c">Baseline: checkpoint-restricted training</text>
+  <text x="370" y="215" text-anchor="middle" font-size="12.5" fill="#333">Keep only the last ball of overs 6, 9, 13, 16</text>
+  <text x="370" y="234" text-anchor="middle" font-size="12.5" fill="#333">(four discrete decision moments)</text>
+  <text x="370" y="258" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#1f3d5c">&#8776; 1,450 &#8211; 9,420 rows per model</text>
+  <text x="370" y="278" text-anchor="middle" font-size="11.5" fill="#666">valid only at 4 discrete overs per innings</text>
+
+  <!-- Right: proposed ball-by-ball -->
+  <rect x="820" y="165" width="620" height="130" rx="8" fill="#fbeee2" stroke="#d0793a" stroke-width="2"/>
+  <text x="1130" y="192" text-anchor="middle" font-size="14.5" font-weight="bold" fill="#7a3f16">Proposed: ball-by-ball training</text>
+  <text x="1130" y="215" text-anchor="middle" font-size="12.5" fill="#333">Keep every delivery (death/powerplay models:</text>
+  <text x="1130" y="234" text-anchor="middle" font-size="12.5" fill="#333">every ball in their phase, not one snapshot ball)</text>
+  <text x="1130" y="258" text-anchor="middle" font-size="13.5" font-weight="bold" fill="#7a3f16">&#8776; 55,163 &#8211; 58,072 rows per model</text>
+  <text x="1130" y="278" text-anchor="middle" font-size="11.5" fill="#666">valid at any ball, any over, throughout the innings</text>
+
+  <g stroke="#555" stroke-width="2.2" marker-end="url(#arrA)">
+    <line x1="370" y1="295" x2="370" y2="330"/>
+    <line x1="1130" y1="295" x2="1130" y2="330"/>
+  </g>
+
+  <rect x="60" y="335" width="620" height="90" rx="8" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
+  <text x="370" y="365" text-anchor="middle" font-size="13" fill="#222">Same 15 algorithms/hyperparameters (Table 0)</text>
+  <text x="370" y="385" text-anchor="middle" font-size="13" fill="#222">Model Suite A (baseline)</text>
+
+  <rect x="820" y="335" width="620" height="90" rx="8" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
+  <text x="1130" y="365" text-anchor="middle" font-size="13" fill="#222">Same 15 algorithms/hyperparameters (Table 0)</text>
+  <text x="1130" y="385" text-anchor="middle" font-size="13" fill="#222">Model Suite B (proposed)</text>
+
+  <text x="750" y="455" text-anchor="middle" font-size="13" fill="#444">
+    Fig. A. The only methodological change between the two suites is training-row selection; algorithms, hyperparameters, and the leakage-safe split are identical.
+  </text>
+</svg>

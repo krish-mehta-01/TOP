@@ -1,0 +1,53 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 660" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arr10" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6.5" markerHeight="6.5" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555555"/>
+    </marker>
+  </defs>
+
+  <g font-size="14" text-anchor="middle">
+    <rect x="410" y="15" width="380" height="65" rx="8" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
+    <text x="600" y="42" font-weight="bold" fill="#222">Full delivery-level dataset</text>
+    <text x="600" y="63" font-size="12" fill="#444">~288,000 rows, 1,212 match_id values</text>
+
+    <rect x="410" y="115" width="380" height="65" rx="8" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="600" y="142" font-weight="bold" fill="#1f3d5c">Extract unique match_id values</text>
+    <text x="600" y="163" font-size="12" fill="#444">one entry per match, not per delivery</text>
+
+    <rect x="410" y="215" width="380" height="65" rx="8" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="600" y="242" font-weight="bold" fill="#1f3d5c">Shuffle with fixed seed (42)</text>
+    <text x="600" y="263" font-size="12" fill="#444">reproducible across every retraining run</text>
+
+    <rect x="410" y="315" width="380" height="65" rx="8" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="600" y="342" font-weight="bold" fill="#1f3d5c">Split 80 / 20 by match</text>
+    <text x="600" y="363" font-size="12" fill="#444">match_level_split() — Section VI-D</text>
+
+    <!-- branch -->
+    <rect x="120" y="440" width="380" height="90" rx="8" fill="#fbeee2" stroke="#d0793a" stroke-width="2"/>
+    <text x="310" y="468" font-weight="bold" fill="#7a3f16">Train matches (80%)</text>
+    <text x="310" y="489" font-size="12" fill="#444">fit categorical vocab/schema</text>
+    <text x="310" y="507" font-size="12" fill="#444">fit model on these rows only</text>
+
+    <rect x="700" y="440" width="380" height="90" rx="8" fill="#eaf3ec" stroke="#3a8f5a" stroke-width="2"/>
+    <text x="890" y="468" font-weight="bold" fill="#1f5c37">Test matches (20%)</text>
+    <text x="890" y="489" font-size="12" fill="#444">never seen during fitting</text>
+    <text x="890" y="507" font-size="12" fill="#444">used only to compute the reported metric</text>
+
+    <rect x="410" y="565" width="380" height="45" rx="8" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
+    <text x="600" y="593" font-size="12.5" fill="#222">Table I / Table II reported metric (R², ROC-AUC, ...)</text>
+  </g>
+
+  <g stroke="#555555" stroke-width="2.2" marker-end="url(#arr10)">
+    <line x1="600" y1="80" x2="600" y2="113"/>
+    <line x1="600" y1="180" x2="600" y2="213"/>
+    <line x1="600" y1="280" x2="600" y2="313"/>
+    <line x1="510" y1="380" x2="330" y2="438"/>
+    <line x1="690" y1="380" x2="880" y2="438"/>
+    <line x1="310" y1="530" x2="560" y2="565"/>
+    <line x1="890" y1="530" x2="650" y2="565"/>
+  </g>
+
+  <text x="600" y="642" text-anchor="middle" font-size="13" fill="#444">
+    Fig. 10. Leakage-safe match-level train/test split, applied identically to every one of the 28 models.
+  </text>
+</svg>

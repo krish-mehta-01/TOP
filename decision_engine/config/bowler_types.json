@@ -1,0 +1,50 @@
+{
+  "_readme": "Pace/spin classification for every bowler name in frontend/src/data/roster.json (matched EXACTLY as spelled there - 'Initials Surname' format). Replaces the old 13-name hardcoded SPINNERS list in decision_engine/live/recommend.py, which only covered a small fraction of the roster and used a different name format (full first names instead of initials), silently misclassifying real spinners like 'SP Narine' (Sunil Narine) as pace bowlers. Classified from real, publicly documented playing records for every named professional cricketer. A small number of minor/associate players with no confidently verifiable public bowling-style record are marked pace by conservative default (matching this system's prior default) rather than guessed - see '_uncertain' list below. Any bowler name not present in this file also defaults to pace at the call site (decision_engine/live/recommend.py), same documented fallback as before.",
+  "_uncertain_defaulted_to_pace": [
+    "M Ashwin", "V Pratap Singh", "DP Vijaykumar", "SB Wagh", "AG Murtaza",
+    "JA Duffy", "Abhinandan Singh", "Ashok Sharma", "SH Johnson", "Prince Yadav", "MP Yadav"
+  ],
+  "spin": [
+    "Harbhajan Singh", "KH Pandya", "RD Chahar", "PP Ojha", "PP Chawla", "M Markande",
+    "MJ Santner", "SP Narine", "CV Varun", "Shakib Al Hasan", "Kuldeep Yadav",
+    "Iqbal Abdulla", "YK Pathan", "RA Jadeja", "R Ashwin", "M Muralitharan",
+    "SB Jakati", "SK Raina", "M Theekshana", "Imran Tahir", "MM Ali", "Noor Ahmad",
+    "SK Warne", "YS Chahal", "S Gopal", "R Tewatia", "PV Tambe", "J Botha",
+    "A Kumble", "Washington Sundar", "PWH de Silva", "DL Vettori", "Shahbaz Ahmed",
+    "Rashid Khan", "KV Sharma", "A Mishra", "AR Patel", "GJ Maxwell",
+    "Mujeeb Ur Rahman", "S Nadeem",
+    "JP Duminy", "V Nigam", "Lalit Yadav", "Harpreet Brar", "LS Livingstone",
+    "Ravi Bishnoi", "Harmeet Singh", "RG Sharma", "Y Venugopal Rao", "Shahid Afridi",
+    "R Sai Kishore", "K Gowtham", "M Siddharth", "AK Markram", "R Sharma",
+    "M Kartik", "Yuvraj Singh", "MN Samuels", "BAW Mendis", "MJ Clarke",
+    "Suyash Sharma", "Swapnil Singh", "Mayank Dagar", "WG Jacks", "DS Rathi"
+  ],
+  "pace": [
+    "JJ Bumrah", "SL Malinga", "KA Pollard", "HH Pandya", "MJ McClenaghan", "TA Boult",
+    "DS Kulkarni", "MM Patel", "Z Khan", "DJ Bravo", "MG Johnson", "JP Behrendorff",
+    "R Vinay Kumar", "AD Russell", "UT Yadav", "JH Kallis", "M Prasidh Krishna",
+    "R Bhatia", "L Balaji", "VG Arora", "PJ Cummins", "M Morkel", "I Sharma",
+    "Shivam Mavi", "Harshit Rana", "B Lee", "DL Chahar", "JA Morkel", "SN Thakur",
+    "MM Sharma", "M Pathirana", "TU Deshpande", "DE Bollinger", "SM Curran",
+    "MS Gony", "SK Trivedi", "SR Watson", "JC Archer", "JP Faulkner",
+    "Sandeep Sharma", "JD Unadkat", "KK Cooper", "SW Tait", "CH Morris",
+    "HV Patel", "Mohammed Siraj", "P Kumar", "DW Steyn", "S Aravind",
+    "Navdeep Saini", "MA Starc", "VR Aaron", "B Kumar", "T Natarajan", "S Kaul",
+    "MC Henriques", "KK Ahmed", "Umran Malik", "M Jansen", "JO Holder",
+    "Mustafizur Rahman", "E Malinga", "IK Pathan", "P Awana", "Mohammed Shami",
+    "S Sreesanth", "Azhar Mahmood", "AJ Tye", "RJ Harris", "R Dhawan",
+    "Anureet Singh", "VRV Singh", "PJ Sangwan", "A Nehra", "DP Nannes",
+    "MF Maharoof", "NM Coulter-Nile", "GD McGrath", "AB Agarkar", "VY Mahesh",
+    "A Nortje", "K Rabada", "Mukesh Kumar", "Avesh Khan", "MR Marsh",
+    "MP Stoinis", "Arshdeep Singh", "NT Ellis", "Vijaykumar Vyshak", "XC Bartlett",
+    "Azmatullah Omarzai", "RP Meredith", "RP Singh", "A Symonds", "DT Christian",
+    "WPUJC Vaas", "SB Styris", "A Ashish Reddy", "SB Bangar", "AS Joseph",
+    "LH Ferguson", "Yash Dayal", "J Little", "Arshad Khan", "Mohsin Khan",
+    "Yash Thakur", "Naveen-ul-Haq", "PVD Chameera", "Akash Deep", "MA Wood",
+    "AB Dinda", "WD Parnell", "AD Mathews", "AC Thomas", "JD Ryder", "JE Taylor",
+    "LJ Wright", "KW Richardson", "JR Hazlewood", "C Green", "R Shepherd",
+    "Rasikh Salam", "RJW Topley", "SC Ganguly",
+    "M Ashwin", "V Pratap Singh", "DP Vijaykumar", "SB Wagh", "AG Murtaza",
+    "JA Duffy", "Abhinandan Singh", "Ashok Sharma", "SH Johnson", "Prince Yadav", "MP Yadav"
+  ]
+}

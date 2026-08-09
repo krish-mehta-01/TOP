@@ -23,7 +23,7 @@ decision_engine/
   live/                  live_state.py, model_runner.py, recommend.py — turns a live
                          scorecard into model features into a recommendation
 backend/                 FastAPI app (app.py) exposing POST /api/recommend
-frontend/                index.html — the live console (vanilla JS, no build step)
+frontend/                Vite + React live console (src/App.jsx)
 PROJECT_REPORT.md        full list of fixes with before/after evidence
 ```
 
@@ -37,11 +37,17 @@ pip install -r requirements.txt
 uvicorn app:app --reload --port 8000
 ```
 
-Then open `frontend/index.html` directly in a browser (or serve it:
-`cd frontend && python3 -m http.server 8080`, then visit
-`http://localhost:8080`). It talks to `http://localhost:8000` — edit the
-`API_BASE` constant near the top of `index.html`'s `<script>` if you run the
-backend somewhere else.
+In a second terminal:
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+Then open the URL Vite prints (typically `http://localhost:5173`). It talks
+to `http://localhost:8000` — edit the `API_BASE` constant near the top of
+`frontend/src/App.jsx` if you run the backend somewhere else.
 
 Toggle **Bowling** / **Batting**, log the innings so far ball by ball (or click
 **Load sample innings** to try it immediately), and click **Get Recommendation**.

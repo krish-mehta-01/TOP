@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 300" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#555555"/>
+    </marker>
+  </defs>
+
+  <!-- boxes -->
+  <g font-size="17" text-anchor="middle">
+    <!-- Box 1: Dataset -->
+    <rect x="20" y="70" width="230" height="140" rx="10" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="135" y="115" font-weight="bold" fill="#1f3d5c">T20 Dataset</text>
+    <text x="135" y="145" font-size="14" fill="#333">1,212 matches</text>
+    <text x="135" y="167" font-size="14" fill="#333">~288,000 deliveries</text>
+    <text x="135" y="189" font-size="12" fill="#666">(ball-by-ball CSV)</text>
+
+    <!-- Box 2: Training pipeline -->
+    <rect x="290" y="70" width="250" height="140" rx="10" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="415" y="105" font-weight="bold" fill="#1f3d5c">Training Pipeline</text>
+    <text x="415" y="132" font-size="13" fill="#333">common.py (shared feature</text>
+    <text x="415" y="150" font-size="13" fill="#333">engineering + match-level split)</text>
+    <text x="415" y="175" font-size="13" fill="#333">train_bowling.py (W1&#8211;W15)</text>
+    <text x="415" y="193" font-size="13" fill="#333">train_batting.py (B1&#8211;B15)</text>
+
+    <!-- Box 3: Model artifacts -->
+    <rect x="600" y="70" width="240" height="140" rx="10" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
+    <text x="720" y="105" font-weight="bold" fill="#1f3d5c">Model Artifacts</text>
+    <text x="720" y="135" font-size="13" fill="#333">28 trained models (.pkl)</text>
+    <text x="720" y="155" font-size="13" fill="#333">+ encoding manifests</text>
+    <text x="720" y="180" font-size="13" fill="#333">reliability.json</text>
+    <text x="720" y="198" font-size="12" fill="#666">(build_reliability.py)</text>
+
+    <!-- Box 4: Decision engine -->
+    <rect x="900" y="70" width="260" height="140" rx="10" fill="#fbeee2" stroke="#d0793a" stroke-width="2"/>
+    <text x="1030" y="105" font-weight="bold" fill="#7a3f16">Decision Engine</text>
+    <text x="1030" y="135" font-size="13" fill="#333">Normalize &#8594; Weight &#8594;</text>
+    <text x="1030" y="153" font-size="13" fill="#333">Aggregate &#8594; Validate &#8594;</text>
+    <text x="1030" y="171" font-size="13" fill="#333">Generate text</text>
+    <text x="1030" y="196" font-size="12" fill="#666">(Fig. 6 details this stage)</text>
+
+    <!-- Box 5: Live console -->
+    <rect x="1220" y="70" width="250" height="140" rx="10" fill="#eaf3ec" stroke="#3a8f5a" stroke-width="2"/>
+    <text x="1345" y="105" font-weight="bold" fill="#1f5c37">Live Console</text>
+    <text x="1345" y="135" font-size="13" fill="#333">FastAPI backend</text>
+    <text x="1345" y="155" font-size="13" fill="#333">POST /api/recommend</text>
+    <text x="1345" y="180" font-size="13" fill="#333">React scorecard + audit UI</text>
+  </g>
+
+  <!-- arrows -->
+  <g stroke="#555555" stroke-width="2.4" marker-end="url(#arrow)">
+    <line x1="252" y1="140" x2="286" y2="140"/>
+    <line x1="542" y1="140" x2="596" y2="140"/>
+    <line x1="842" y1="140" x2="896" y2="140"/>
+    <line x1="1162" y1="140" x2="1216" y2="140"/>
+  </g>
+
+  <text x="750" y="260" text-anchor="middle" font-size="13.5" fill="#444">
+    Fig. 1. End-to-end pipeline: a static offline stage (dataset &#8594; training &#8594; artifacts) feeds a live inference stage (decision engine &#8594; console).
+  </text>
+</svg>
