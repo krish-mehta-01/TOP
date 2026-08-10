@@ -283,18 +283,9 @@ class TextGenerator:
             combined_advice = " AND ".join(advices)
             lines.append(f"• To the {target}: {combined_advice}")
 
-        blocked_note = ""
-        if decision["blocked"]:
-            shown = decision["blocked"][:3]
-            blocked_desc = ", ".join(f"{a} (blocked: {rid})" for a, rid in shown)
-            remaining = len(decision["blocked"]) - len(shown)
-            if remaining > 0:
-                blocked_desc += f", and {remaining} more"
-            blocked_note = f"\nNote: {blocked_desc} scored higher but was tactically ruled out."
-
         coverage_note = ""
         if coverage < 0.6:
             coverage_note = f"\n(Confidence limited: {n_signals}/{n_total} models fired for this state)"
 
-        full_text = "\n".join(lines) + blocked_note + coverage_note
+        full_text = "\n".join(lines) + coverage_note
         return full_text

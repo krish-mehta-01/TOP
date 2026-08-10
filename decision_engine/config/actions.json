@@ -3518,6 +3518,12 @@
         "condition": "bowler_is_spin"
       },
       {
+        "id": "no_yorker_for_spinners",
+        "description": "Spinners cannot bowl yorkers.",
+        "blocks_keyword": "yorker",
+        "condition": "bowler_is_spin"
+      },
+      {
         "id": "no_cutter_for_spinners",
         "description": "Spinners cannot bowl off or leg cutters.",
         "blocks_keyword": "cutter",
