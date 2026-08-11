@@ -48,7 +48,9 @@ class DecisionEngine:
     def models_for_role(self, role: str):
         return {mid: cfg for mid, cfg in self.model_config.items() if cfg["role"] == role}
 
-    def decide(self, role: str, raw_model_outputs: dict, match_state: dict) -> dict:
+    def decide(self, role: str, raw_model_outputs: dict, match_state: dict, live_state: dict = None) -> dict:
+        if live_state is None:
+            live_state = {}
         role_models = self.models_for_role(role)
         phase = match_state.get("phase", "middle")
 
@@ -75,7 +77,7 @@ class DecisionEngine:
         decision["n_models_total"] = len(role_models)
 
         # 4) Generate coach-readable text
-        text = self.text_generator.generate(role, decision)
+        text = self.text_generator.generate(role, decision, match_state, live_state)
 
         return {
             "role": role,
@@ -87,4 +89,6 @@ class DecisionEngine:
             "contributions": decision["contributions"],
             "signals_used": signals,
             "text": text,
+            "n_signals": decision["n_signals"],
+            "n_models_total": decision["n_models_total"],
         }

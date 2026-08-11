@@ -1,4 +1,3 @@
-import { Trophy } from 'lucide-react';
 import { motion } from 'framer-motion';
 
 export default function LiveScoreBanner({ balls, matchState }) {
@@ -17,37 +16,52 @@ export default function LiveScoreBanner({ balls, matchState }) {
   const oversStr = `${overs}.${extraBalls}`;
   const crr = legalBalls > 0 ? ((runs / legalBalls) * 6).toFixed(2) : '0.00';
 
+  // Get active players from the last ball logged
+  const lastBall = balls.length > 0 ? balls[balls.length - 1] : null;
+  const striker = lastBall ? lastBall.batter : "Waiting...";
+  const nonStriker = lastBall ? lastBall.non_striker : "Waiting...";
+  const bowler = matchState.current_bowler || "Waiting...";
+
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: -20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="panel"
-      style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '1.5rem', background: 'linear-gradient(90deg, rgba(30,41,59,0.7) 0%, rgba(15,23,42,0.7) 100%)' }}
-    >
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-        <Trophy size={28} className="icon-accent" />
+    <div className="dashboard-header">
+      <div style={{ display: 'flex', alignItems: 'center', gap: '32px' }}>
         <div>
-          <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>
-            {matchState.venue} • Innings {matchState.innings}
+          <div style={{ fontSize: '12px', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>
+            {matchState.venue} • INN {matchState.innings}
           </div>
-          <div style={{ fontSize: '1.5rem', fontWeight: 'bold', display: 'flex', alignItems: 'center', gap: '0.5rem' }}>
-            <span style={{ color: 'var(--text-light)' }}>{matchState.batting_team}</span>
-            <span style={{ color: 'var(--accent-primary)' }}>{runs}/{wickets}</span>
-            <span style={{ fontSize: '1rem', color: 'var(--text-muted)' }}>({oversStr})</span>
+          <div style={{ fontSize: '24px', fontWeight: '800', marginTop: '4px', letterSpacing: '-0.02em' }}>
+            {matchState.batting_team.toUpperCase()}
           </div>
+        </div>
+
+        <div className="clinical-score">
+          <span className="runs">{runs}</span>
+          <span className="slash">/</span>
+          <span className="wickets">{wickets}</span>
+        </div>
+
+        <div className="clinical-overs">
+          <div style={{ fontSize: '10px', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>Overs</div>
+          <div className="val">{oversStr}</div>
+        </div>
+
+        <div className="clinical-overs">
+          <div style={{ fontSize: '10px', color: 'var(--text-dim)', textTransform: 'uppercase', letterSpacing: '0.1em' }}>CRR</div>
+          <div className="val">{crr}</div>
         </div>
       </div>
       
-      <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', textAlign: 'right' }}>
-        <div>
-          <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>CRR</div>
-          <div style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--text-light)' }}>{crr}</div>
+      <div className="active-players">
+        <div className="player-box">
+          <div className="lbl">BATTERS</div>
+          <div className="name active">{striker} *</div>
+          <div className="name">{nonStriker}</div>
         </div>
-        <div style={{ paddingLeft: '1rem', borderLeft: '1px solid rgba(255,255,255,0.1)' }}>
-          <div style={{ fontSize: '0.875rem', color: 'var(--text-muted)' }}>vs</div>
-          <div style={{ fontSize: '1.25rem', fontWeight: '600', color: 'var(--text-light)' }}>{matchState.bowling_team}</div>
+        <div className="player-box">
+          <div className="lbl">BOWLER</div>
+          <div className="name active" style={{color: 'var(--amber-bright)'}}>{bowler}</div>
         </div>
       </div>
-    </motion.div>
+    </div>
   );
 }

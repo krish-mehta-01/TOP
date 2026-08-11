@@ -24,7 +24,11 @@ import json
 import os
 
 _CONFIG_DIR = os.path.dirname(__file__).replace("core", "config")
-_RELIABILITY_PATH = os.path.join(_CONFIG_DIR, "reliability.json")
+# Defaults to reliability.json (paper 1), unchanged unless explicitly overridden -
+# set TOP_RELIABILITY_FILE=reliability_ballbyball.json to load the reliability
+# weights derived from the ball-by-ball-retrained bowling suite (paper 2) instead.
+_RELIABILITY_FILE = os.environ.get("TOP_RELIABILITY_FILE", "reliability.json")
+_RELIABILITY_PATH = os.path.join(_CONFIG_DIR, _RELIABILITY_FILE)
 
 PHASE_RELEVANCE = {
     # bowling models

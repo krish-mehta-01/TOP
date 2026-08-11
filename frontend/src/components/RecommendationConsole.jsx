@@ -10,11 +10,11 @@ const ACTION_LABELS = {
   defend_wicket: "Play cautiously, protect the wicket", target_boundaries: "Target boundaries",
   build_partnership: "Build the partnership",
 };
-function actionLabel(a){ return ACTION_LABELS[a] || a; }
-
-function confidenceFromText(text){
-  const m = text?.match(/Confidence:\s*(\d+)%/);
-  return m ? parseInt(m[1]) : 0;
+function actionLabel(a){ 
+  if (ACTION_LABELS[a]) return ACTION_LABELS[a];
+  if (!a) return "";
+  const text = a.replace(/_/g, ' ');
+  return text.charAt(0).toUpperCase() + text.slice(1);
 }
 
 function scoreToPercent(score){
@@ -48,13 +48,24 @@ export default function RecommendationConsole({ error, recommendation, role }) {
     );
   }
 
-  const { text, phase, chosen, audit, contributions } = recommendation;
-  const conf = confidenceFromText(text);
+  const { text, phase, chosen, audit, contributions, confidence } = recommendation;
+  const conf = confidence ?? 0;
 
   const alternatives = audit
     .filter(a => !a.chosen && !a.blocked_by && a.score > -2.0)
     .sort((a, b) => b.score - a.score)
-    .slice(0, 2);
+    .slice(0, 3);
+
+  const topDriver = (action) => {
+    const c = contributions[action];
+    if (!c || !c.length) return null;
+    return c[0];
+  };
+
+  const sortedAudit = [...audit].sort((a, b) => b.score - a.score);
+  const displayAudit = sortedAudit.length > 10 
+    ? [...sortedAudit.slice(0, 7), { isDivider: true, hiddenCount: sortedAudit.length - 10 }, ...sortedAudit.slice(-3)]
+    : sortedAudit;
 
   return (
     <div className="panel">
@@ -69,24 +80,55 @@ export default function RecommendationConsole({ error, recommendation, role }) {
               <div className="conf-num">{conf}%</div>
             </div>
           )}
-          <div className="rec-note">{text}</div>
-          
-          {alternatives.length > 0 && (
-            <div style={{marginTop: '12px', paddingTop: '12px', borderTop: '1px solid rgba(255,255,255,0.1)'}}>
-              <div style={{fontSize: '0.75rem', color: 'var(--text-muted)', marginBottom: '4px'}}>Alternative Options:</div>
-              {alternatives.map((alt, idx) => (
-                <div key={idx} style={{fontSize: '0.875rem', color: 'var(--text-light)', display: 'flex', justifyContent: 'space-between'}}>
-                  <span>{actionLabel(alt.action)}</span>
-                  <span style={{color: alt.score > 0 ? '#10b981' : 'var(--text-muted)'}}>
-                    {alt.score > 0 ? `+${alt.score.toFixed(2)}` : alt.score.toFixed(2)} score
-                  </span>
-                </div>
-              ))}
-            </div>
-          )}
+          <div className="rec-note" style={{ whiteSpace: 'pre-wrap' }}>{text}</div>
         </div>
+
+        {chosen && (
+          <div className="coach-options">
+            <div className="subhead" style={{padding: '0 24px', margin: '20px 0 12px'}}>
+              <ChevronRight size={14}/> Options a coach could take for this situation
+            </div>
+            <div className="option-card option-card--top">
+              <div className="option-rank">1</div>
+              <div className="option-body">
+                <div className="option-label">{actionLabel(chosen[0])}</div>
+                <div className="option-meta">
+                  <span className="option-tag option-tag--top">Highest-scoring, unblocked</span>
+                  <span className="option-score">{chosen[1] >= 0 ? '+' : ''}{chosen[1].toFixed(2)}</span>
+                </div>
+              </div>
+            </div>
+            {alternatives.map((alt, idx) => {
+              const driver = topDriver(alt.action);
+              return (
+                <div key={idx} className="option-card">
+                  <div className="option-rank">{idx + 2}</div>
+                  <div className="option-body">
+                    <div className="option-label">{actionLabel(alt.action)}</div>
+                    <div className="option-meta">
+                      <span className="option-tag">
+                        {driver ? `Driven by ${driver.model_id} — ${driver.label}` : 'Alternative, close behind'}
+                      </span>
+                      <span className="option-score">{alt.score >= 0 ? '+' : ''}{alt.score.toFixed(2)}</span>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+            {alternatives.length === 0 && (
+              <div className="option-empty">No other action scored close enough to be a genuine alternative for this state.</div>
+            )}
+          </div>
+        )}
         <div className="signal-readout">
-          {audit.map((row, i) => {
+          {displayAudit.map((row, i) => {
+            if (row.isDivider) {
+              return (
+                <div key={`div-${i}`} style={{ textAlign: 'center', color: 'var(--text-faint)', fontSize: '11px', margin: '4px 0', padding: '4px 0', borderTop: '1px dashed rgba(255,255,255,0.05)', borderBottom: '1px dashed rgba(255,255,255,0.05)' }}>
+                  ... {row.hiddenCount} actions hidden ...
+                </div>
+              );
+            }
             const pct = scoreToPercent(row.score);
             const isPos = row.score >= 0;
             return (

@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1500 420" font-family="DejaVu Sans, Arial, sans-serif">
+  <defs>
+    <marker id="arrB" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+      <path d="M0,0 L10,5 L0,10 z" fill="#444444"/>
+    </marker>
+  </defs>
+
+  <text x="750" y="30" text-anchor="middle" font-size="16" font-weight="bold" fill="#222">Where a recommendation can be validly requested across a 20-over innings</text>
+
+  <!-- Baseline timeline -->
+  <text x="60" y="90" font-size="14" font-weight="bold" fill="#1f3d5c">Checkpoint-scoped baseline</text>
+  <line x1="60" y1="120" x2="1440" y2="120" stroke="#999" stroke-width="2" marker-end="url(#arrB)"/>
+  <text x="60" y="145" font-size="11" fill="#666">over 0</text>
+  <text x="1400" y="145" font-size="11" fill="#666">over 20</text>
+
+  <g fill="#3b6ea5">
+    <circle cx="474" cy="120" r="9"/>
+    <circle cx="681" cy="120" r="9"/>
+    <circle cx="957" cy="120" r="9"/>
+    <circle cx="1164" cy="120" r="9"/>
+  </g>
+  <g font-size="11.5" fill="#1f3d5c" text-anchor="middle">
+    <text x="474" y="102">over 6</text>
+    <text x="681" y="102">over 9</text>
+    <text x="957" y="102">over 13</text>
+    <text x="1164" y="102">over 16</text>
+  </g>
+  <text x="1440" y="120" text-anchor="end" font-size="13" fill="#1f3d5c" font-weight="bold" dy="-16">4 valid decision points / innings</text>
+
+  <!-- Proposed timeline -->
+  <text x="60" y="230" font-size="14" font-weight="bold" fill="#7a3f16">Proposed (ball-by-ball)</text>
+  <line x1="60" y1="260" x2="1440" y2="260" stroke="#d0793a" stroke-width="6" marker-end="url(#arrB)"/>
+  <text x="60" y="285" font-size="11" fill="#666">over 0</text>
+  <text x="1400" y="285" font-size="11" fill="#666">over 20</text>
+  <text x="750" y="245" text-anchor="middle" font-size="12" fill="#7a3f16">every legal delivery is a valid decision point</text>
+  <text x="1440" y="260" text-anchor="end" font-size="13" fill="#7a3f16" font-weight="bold" dy="-20">up to 120 valid decision points / innings</text>
+
+  <!-- shared phase bands underneath for context -->
+  <g font-size="11" fill="#888" text-anchor="middle">
+    <text x="266" y="340">Powerplay (overs 0&#8211;5)</text>
+    <text x="750" y="340">Middle overs (overs 6&#8211;14)</text>
+    <text x="1233" y="340">Death overs (overs 15&#8211;19)</text>
+  </g>
+  <line x1="60" y1="325" x2="474" y2="325" stroke="#ccc" stroke-width="3"/>
+  <line x1="474" y1="325" x2="1095" y2="325" stroke="#ccc" stroke-width="3"/>
+  <line x1="1095" y1="325" x2="1440" y2="325" stroke="#ccc" stroke-width="3"/>
+
+  <text x="750" y="385" text-anchor="middle" font-size="13" fill="#444">
+    Fig. B. The checkpoint-scoped baseline restricts recommendations to four discrete overs; the proposed system extends validated coverage to every delivery, at the trade-offs identified in Section XII (alert frequency, per-context accuracy).
+  </text>
+</svg>

@@ -37,10 +37,18 @@ class RuleValidator:
 
         def is_blocked(action):
             for rule in role_rules:
-                if rule["blocks"] != action:
+                if "blocks_keyword" in rule:
+                    if rule["blocks_keyword"] not in action:
+                        continue
+                elif rule["blocks"] != action:
                     continue
+                
                 cond = rule["condition"]
-                if cond == "recent_wicket_and_low_containment_confidence" and match_state.get("recent_wicket") and match_state.get("containment_confidence", 1.0) < 0.4:
+                if cond == "bowler_is_spin" and match_state.get("bowler_is_spin"):
+                    return rule["id"]
+                if cond == "bowler_is_pace" and not match_state.get("bowler_is_spin", True):
+                    return rule["id"]
+                if cond == "recent_wicket" and match_state.get("recent_wicket"):
                     return rule["id"]
                 if cond == "overs_bowled_below_minimum" and match_state.get("overs_bowled_by_current_bowler", 99) < 2:
                     return rule["id"]

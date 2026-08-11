@@ -5,6 +5,7 @@ The one function the backend calls: takes the raw scorecard JSON the
 frontend sends and returns the full DecisionEngine result.
 """
 
+import json
 import os
 import sys
 
@@ -21,6 +22,18 @@ from live.model_runner import get_runner  # noqa: E402
 
 _CONFIG_DIR = os.path.join(os.path.dirname(__file__), "..", "config")
 _STATS_PATH = os.path.join(_CONFIG_DIR, "model_stats.json")
+
+# Replaces the old 13-name hardcoded SPINNERS list, which only covered a small
+# fraction of the actual team rosters and used a different name format ("Sunil
+# Narine" instead of the roster's "SP Narine") - silently misclassifying real
+# spinners as pace bowlers and letting the rule_validator's pace-only/spin-only
+# delivery-type rules (actions.json's "rules") pass them incorrectly. Covers
+# every one of the 200 unique bowler names in frontend/src/data/roster.json -
+# see decision_engine/config/bowler_types.json's "_readme"/"_uncertain..." keys
+# for exactly how each name was classified and which few are best-effort.
+with open(os.path.join(_CONFIG_DIR, "bowler_types.json")) as _f:
+    _BOWLER_TYPES = json.load(_f)
+SPINNERS = set(_BOWLER_TYPES["spin"])
 
 _engine = None
 
@@ -55,10 +68,12 @@ def recommend(payload: dict) -> dict:
         state = compute_bowling_state(df, bowler)
         raw_outputs = runner.predict_bowling(state)
         over = state["over"]
+
         match_state = {
             "phase": phase_from_over(over),
             "overs_bowled_by_current_bowler": state["overs_bowled_by_current_bowler"],
             "recent_wicket": bool(df["is_wicket"].tail(6).sum() > 0),
+            "bowler_is_spin": bowler in SPINNERS,
         }
     elif role == "batting":
         state = compute_batting_state(df)
@@ -79,7 +94,7 @@ def recommend(payload: dict) -> dict:
     # match_state_overrides once a target exists (2nd innings chases).
 
     engine = get_engine()
-    result = engine.decide(role=role, raw_model_outputs=raw_outputs, match_state=match_state)
+    result = engine.decide(role=role, raw_model_outputs=raw_outputs, match_state=match_state, live_state=state)
     result["raw_model_outputs"] = raw_outputs
     result["state"] = {k: v for k, v in state.items() if not hasattr(v, "__len__") or isinstance(v, str)}
     return result

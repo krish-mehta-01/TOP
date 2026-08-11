@@ -21,6 +21,13 @@ import pandas as pd
 _HERE = os.path.dirname(__file__)
 MODELS_ROOT = os.path.join(_HERE, "..", "..", "models")
 
+# Which bowling model directory to load from. Defaults to "bowling" (paper 1's
+# timeout-snapshot-trained W-series), unchanged unless explicitly overridden -
+# set TOP_BOWLING_MODEL_DIR=bowling_ballbyball to serve the ball-by-ball
+# -retrained suite (paper 2) instead. Batting is unaffected either way, since
+# it is not retrained between the two papers.
+BOWLING_MODEL_DIR = os.environ.get("TOP_BOWLING_MODEL_DIR", "bowling")
+
 BOWLING_SNAPSHOT_FEATURES = [
     "venue", "batting_team", "bowling_team", "innings", "over",
     "current_runs_conceded", "current_balls_bowled", "current_wickets",
@@ -60,7 +67,7 @@ class ModelRunner:
     def __init__(self):
         self.models = {}
         self.manifests = {}
-        self._load_role("bowling", [f"W{i}" for i in range(1, 16)])
+        self._load_role(BOWLING_MODEL_DIR, [f"W{i}" for i in range(1, 16)])
         self._load_role("batting", ["B1", "B2", "B3", "B5", "B6", "B8", "B9", "B10", "B11",
                                      "B12", "B13", "B14", "B15"])
 

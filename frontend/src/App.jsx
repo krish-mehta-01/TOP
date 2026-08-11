@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
-import Header from './components/Header';
 import RoleToggle from './components/RoleToggle';
 import LiveScoreBanner from './components/LiveScoreBanner';
 import ScorecardPanel from './components/ScorecardPanel';
 import RecommendationConsole from './components/RecommendationConsole';
+import ModelDiagnostics from "./components/ModelDiagnostics";
 import './index.css';
 
 const API_BASE = "http://localhost:8000";
@@ -11,7 +11,7 @@ const API_BASE = "http://localhost:8000";
 function App() {
   const [role, setRole] = useState('bowling');
   const [balls, setBalls] = useState([]);
-  const [backendStatus, setBackendStatus] = useState('checking'); // 'checking', 'live', 'down'
+  const [backendStatus, setBackendStatus] = useState('checking');
   
   const [matchState, setMatchState] = useState({
     venue: "M Chinnaswamy Stadium, Bengaluru",
@@ -50,10 +50,20 @@ function App() {
 
   const handleAddBall = (ballData) => {
     setBalls(prev => [...prev, ballData]);
+    setRecommendation(null);
+    setError(null);
   };
 
   const handleDeleteBall = (index) => {
     setBalls(prev => prev.filter((_, i) => i !== index));
+    setRecommendation(null);
+    setError(null);
+  };
+
+  const handleRoleChange = (newRole) => {
+    setRole(newRole);
+    setRecommendation(null);
+    setError(null);
   };
 
   const handleClear = () => {
@@ -131,14 +141,14 @@ function App() {
   };
 
   return (
-    <div className="wrap">
-      <Header status={backendStatus} />
+    <div className="app-dashboard">
+      <LiveScoreBanner balls={balls} matchState={matchState} />
       
-      <RoleToggle role={role} setRole={setRole} />
-      
-      {balls.length > 0 && <LiveScoreBanner balls={balls} matchState={matchState} />}
-
-      <div className="grid">
+      <div className="dashboard-left">
+        <div style={{display: 'flex', flexDirection: 'column', gap: '16px', marginBottom: '16px'}}>
+            <RoleToggle role={role} setRole={handleRoleChange} />
+        </div>
+        
         <ScorecardPanel 
           role={role}
           balls={balls}
@@ -151,18 +161,18 @@ function App() {
           matchState={matchState}
           setMatchState={setMatchState}
         />
-        
-        <RecommendationConsole 
-          error={error}
-          recommendation={recommendation}
-          role={role}
-        />
       </div>
-
-      <footer>
-        <span>POST /api/recommend · localhost:8000</span>
-        <span>28 models retrained on 1,212 IPL matches · match-level split, seed 42</span>
-      </footer>
+      
+      <div className="dashboard-right">
+        <div style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}>
+          <RecommendationConsole 
+            error={error}
+            recommendation={recommendation}
+            role={role}
+          />
+          <ModelDiagnostics recommendation={recommendation} />
+        </div>
+      </div>
     </div>
   );
 }
