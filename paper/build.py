@@ -23,7 +23,7 @@ EDGE_PATH = r"C:\Program Files (x86)\Microsoft\Edge\Application\msedge.exe"
 CSS = """
 @page {
   size: A4;
-  margin: 25mm 22mm 25mm 22mm;
+  margin: 20mm 19mm 20mm 19mm;
 }
 * { box-sizing: border-box; }
 html, body {
@@ -34,8 +34,8 @@ html, body {
 }
 body {
   font-family: "Times New Roman", Times, "Liberation Serif", serif;
-  font-size: 12pt;
-  line-height: 1.5;
+  font-size: 11.3pt;
+  line-height: 1.38;
   text-align: justify;
   hyphens: auto;
 }
@@ -56,23 +56,23 @@ body {
 }
 h1.abstract-h { display: none; }
 h2 {
-  font-size: 12.5pt;
+  font-size: 12pt;
   font-weight: bold;
   text-transform: none;
   letter-spacing: 0.02em;
-  margin: 7mm 0 3mm 0;
+  margin: 5mm 0 2.2mm 0;
   page-break-after: avoid;
   border-bottom: 0.4pt solid #999;
-  padding-bottom: 1mm;
+  padding-bottom: 0.8mm;
 }
 h3 {
-  font-size: 11.5pt;
+  font-size: 11pt;
   font-weight: bold;
   font-style: italic;
-  margin: 5mm 0 2mm 0;
+  margin: 3.5mm 0 1.5mm 0;
   page-break-after: avoid;
 }
-p { margin: 0 0 2.6mm 0; orphans: 3; widows: 3; }
+p { margin: 0 0 2.1mm 0; orphans: 3; widows: 3; }
 strong { font-weight: bold; }
 em { font-style: italic; }
 hr { display: none; }
@@ -123,6 +123,8 @@ section.abstract p { font-size: 11pt; }
 p img {
   display: block;
   max-width: 100%;
+  max-height: 92mm;
+  width: auto;
   height: auto;
   margin: 4mm auto 1mm auto;
   page-break-inside: avoid;
