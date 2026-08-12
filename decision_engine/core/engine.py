@@ -91,4 +91,5 @@ class DecisionEngine:
             "text": text,
             "n_signals": decision["n_signals"],
             "n_models_total": decision["n_models_total"],
+            "labels": self.action_labels.get(role, {}),
         }

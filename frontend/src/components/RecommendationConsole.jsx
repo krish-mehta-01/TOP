@@ -10,7 +10,8 @@ const ACTION_LABELS = {
   defend_wicket: "Play cautiously, protect the wicket", target_boundaries: "Target boundaries",
   build_partnership: "Build the partnership",
 };
-function actionLabel(a){ 
+function actionLabel(a, labels){
+  if (labels && labels[a]) return labels[a];
   if (ACTION_LABELS[a]) return ACTION_LABELS[a];
   if (!a) return "";
   const text = a.replace(/_/g, ' ');
@@ -48,7 +49,7 @@ export default function RecommendationConsole({ error, recommendation, role }) {
     );
   }
 
-  const { text, phase, chosen, audit, contributions, confidence } = recommendation;
+  const { text, phase, chosen, audit, contributions, confidence, labels } = recommendation;
   const conf = confidence ?? 0;
 
   const alternatives = audit
@@ -73,7 +74,7 @@ export default function RecommendationConsole({ error, recommendation, role }) {
       <div>
         <div className={`rec-headline ${role}`}>
           <div className="eyebrow">{role} · {phase} overs</div>
-          <div className="action">{chosen ? actionLabel(chosen[0]) : "No confident recommendation"}</div>
+          <div className="action">{chosen ? actionLabel(chosen[0], labels) : "No confident recommendation"}</div>
           {chosen && (
             <div className="rec-confidence">
               <div className="conf-bar"><div className="conf-fill" style={{width: `${conf}%`}}></div></div>
@@ -91,7 +92,7 @@ export default function RecommendationConsole({ error, recommendation, role }) {
             <div className="option-card option-card--top">
               <div className="option-rank">1</div>
               <div className="option-body">
-                <div className="option-label">{actionLabel(chosen[0])}</div>
+                <div className="option-label">{actionLabel(chosen[0], labels)}</div>
                 <div className="option-meta">
                   <span className="option-tag option-tag--top">Highest-scoring, unblocked</span>
                   <span className="option-score">{chosen[1] >= 0 ? '+' : ''}{chosen[1].toFixed(2)}</span>
@@ -104,7 +105,7 @@ export default function RecommendationConsole({ error, recommendation, role }) {
                 <div key={idx} className="option-card">
                   <div className="option-rank">{idx + 2}</div>
                   <div className="option-body">
-                    <div className="option-label">{actionLabel(alt.action)}</div>
+                    <div className="option-label">{actionLabel(alt.action, labels)}</div>
                     <div className="option-meta">
                       <span className="option-tag">
                         {driver ? `Driven by ${driver.model_id} — ${driver.label}` : 'Alternative, close behind'}
@@ -133,7 +134,7 @@ export default function RecommendationConsole({ error, recommendation, role }) {
             const isPos = row.score >= 0;
             return (
               <div key={i} className={`readout-row ${row.chosen ? 'chosen' : ''}`}>
-                <div className="label">{actionLabel(row.action)}</div>
+                <div className="label">{actionLabel(row.action, labels)}</div>
                 <div className="readout-track">
                   <div className="readout-axis"></div>
                   <div className={`readout-fill ${isPos ? 'pos' : 'neg'}`} style={{width: `${pct}%`, [isPos ? 'left' : 'right']: '50%'}}></div>
