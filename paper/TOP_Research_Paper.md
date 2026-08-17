@@ -522,10 +522,15 @@ the batting training script fits 13 of the 15 possible B-models (B4 was never
 implemented and B7 — a static batter-versus-bowler lookup table — is retained as a
 reference artifact but does not feed the live decision engine). A separate script
 converts the resulting per-model validation metrics into the reliability multipliers
-described in Section VI-F. Fig. 11 details how a single delivery's engineered
-features fan out to the role-relevant subset of models during live inference.
+described in Section VI-F. Fig. 11 and Fig. 12 detail how a single delivery's
+engineered features fan out to the role-relevant subset of models during live
+inference, for the bowling and batting sides respectively — the same fan-out/fan-in
+structure, differing only in which model cluster fires and how many models it
+contains.
 
-![Fig. 11. Per-ball model fan-out during live inference](figures/fig11_model_flow.svg)
+![Fig. 11. Per-ball bowling-model fan-out during live inference](figures/fig11_model_flow.svg)
+
+![Fig. 12. Per-ball batting-model fan-out during live inference](figures/fig12_batting_model_flow.svg)
 
 The **decision-engine layer** (`decision_engine/`) is the system's aggregation core
 and is organized as five single-responsibility components behind one orchestrating
@@ -683,21 +688,21 @@ built-in sample-innings shortcut.
 **Batting-timeout scenario (powerplay, over 5.5).** A batting-role innings was
 scored through the powerplay, with a wicket falling shortly before the timeout,
 reaching the batting strategic-timeout window the console flags automatically at
-50/2 after 5.5 overs (CRR 8.57). Fig. 12 shows the resulting dashboard: the live
+50/2 after 5.5 overs (CRR 8.57). Fig. 13 shows the resulting dashboard: the live
 scorecard, the timeout-window indicator, and the decision engine's ranked
 recommendation for the batting side at this point in the innings — the top-ranked
 action responds directly to the recent wicket.
 
-![Fig. 12. Live console — batting-role scenario at 50/2, over 5.5 (powerplay)](figures/fig12_top_frontend_batting_over_6.png)
+![Fig. 13. Live console — batting-role scenario at 50/2, over 5.5 (powerplay)](figures/fig12_top_frontend_batting_over_6.png)
 
 **Bowling-timeout scenario (middle overs, over 13.4).** A separate, independent
 bowling-role scenario was built up to 114/1 after 13.4 overs (CRR 8.34) — inside
 the middle-overs window — with bowler rotation consistent with the console's
 enforced bowling-change rules (no more than four overs per bowler, no consecutive
-overs for the same bowler). Fig. 13 shows the resulting dashboard for the bowling
+overs for the same bowler). Fig. 14 shows the resulting dashboard for the bowling
 side at this point in the innings.
 
-![Fig. 13. Live console — bowling-role scenario at 114/1, over 13.4 (middle overs)](figures/fig13_top_frontend_bowling_over_14.png)
+![Fig. 14. Live console — bowling-role scenario at 114/1, over 13.4 (middle overs)](figures/fig13_top_frontend_bowling_over_14.png)
 
 Both scenarios use the console's real, working team-roster data rather than
 placeholder names, since the purpose of these figures is to demonstrate the actual

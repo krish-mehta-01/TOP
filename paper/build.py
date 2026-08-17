@@ -137,6 +137,9 @@ p:has(img) {
 p:has(img) + p {
   margin-top: 0;
 }
+p:has(img) + p:has(img) {
+  margin-top: 12mm;
+}
 .gallery {
   display: grid;
   grid-template-columns: 1fr 1fr;

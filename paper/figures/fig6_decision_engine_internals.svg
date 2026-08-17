@@ -10,43 +10,43 @@
     <rect x="15" y="80" width="230" height="130" rx="9" fill="#f2f2f2" stroke="#666" stroke-width="2"/>
     <text x="130" y="118" font-weight="bold" fill="#222">Raw Model</text>
     <text x="130" y="138" font-weight="bold" fill="#222">Outputs</text>
-    <text x="130" y="165" font-size="12.5" fill="#444">~15 scalars</text>
-    <text x="130" y="182" font-size="12.5" fill="#444">(role-relevant models)</text>
+    <text x="130" y="165" font-size="12.5" font-weight="600" fill="#333">~15 scalars</text>
+    <text x="130" y="182" font-size="12.5" font-weight="600" fill="#333">(role-relevant models)</text>
 
     <!-- 2 Normalizer -->
     <rect x="270" y="80" width="230" height="130" rx="9" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
     <text x="385" y="118" font-weight="bold" fill="#1f3d5c">Normalizer</text>
-    <text x="385" y="145" font-size="12.5" fill="#333">probability &#8594; (p&#8722;0.5)&#215;2</text>
-    <text x="385" y="163" font-size="12.5" fill="#333">regression &#8594; clip(z/2,&#8722;1,1)</text>
-    <text x="385" y="181" font-size="12.5" fill="#333">formula &#8594; tanh(x/&#963;)</text>
+    <text x="385" y="145" font-size="12.5" font-weight="600" fill="#222">probability &#8594; (p&#8722;0.5)&#215;2</text>
+    <text x="385" y="163" font-size="12.5" font-weight="600" fill="#222">regression &#8594; clip(z/2,&#8722;1,1)</text>
+    <text x="385" y="181" font-size="12.5" font-weight="600" fill="#222">formula &#8594; tanh(x/&#963;)</text>
 
     <!-- 3 Weighter -->
     <rect x="525" y="80" width="230" height="130" rx="9" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
     <text x="640" y="118" font-weight="bold" fill="#1f3d5c">Weighter</text>
-    <text x="640" y="148" font-size="12.5" fill="#333">weight = phase mult.</text>
-    <text x="640" y="166" font-size="12.5" fill="#333">&#215; reliability score</text>
-    <text x="640" y="188" font-size="11.5" fill="#666">(Table I, II)</text>
+    <text x="640" y="148" font-size="12.5" font-weight="600" fill="#222">weight = phase mult.</text>
+    <text x="640" y="166" font-size="12.5" font-weight="600" fill="#222">&#215; reliability score</text>
+    <text x="640" y="188" font-size="11.5" font-weight="600" fill="#555">(Table I)</text>
 
     <!-- 4 Aggregator -->
     <rect x="780" y="80" width="250" height="130" rx="9" fill="#eaf1f8" stroke="#3b6ea5" stroke-width="2"/>
     <text x="905" y="118" font-weight="bold" fill="#1f3d5c">Aggregator</text>
-    <text x="905" y="148" font-size="12.5" fill="#333">score(action) += signal &#215;</text>
-    <text x="905" y="166" font-size="12.5" fill="#333">direction &#215; weight</text>
-    <text x="905" y="188" font-size="11.5" fill="#666">summed over all firing models</text>
+    <text x="905" y="148" font-size="12.5" font-weight="600" fill="#222">score(action) += signal &#215;</text>
+    <text x="905" y="166" font-size="12.5" font-weight="600" fill="#222">direction &#215; weight</text>
+    <text x="905" y="188" font-size="11.5" font-weight="600" fill="#555">summed over all firing models</text>
 
     <!-- 5 RuleValidator -->
     <rect x="1055" y="80" width="240" height="130" rx="9" fill="#fbeee2" stroke="#d0793a" stroke-width="2"/>
     <text x="1175" y="118" font-weight="bold" fill="#7a3f16">RuleValidator</text>
-    <text x="1175" y="148" font-size="12.5" fill="#333">skips ranked actions</text>
-    <text x="1175" y="166" font-size="12.5" fill="#333">that break a hard rule</text>
-    <text x="1175" y="188" font-size="11.5" fill="#666">(Appendix B)</text>
+    <text x="1175" y="148" font-size="12.5" font-weight="600" fill="#222">skips ranked actions</text>
+    <text x="1175" y="166" font-size="12.5" font-weight="600" fill="#222">that break a hard rule</text>
+    <text x="1175" y="188" font-size="11.5" font-weight="600" fill="#555">(Section VII-D)</text>
 
     <!-- 6 TextGenerator -->
     <rect x="1320" y="80" width="260" height="130" rx="9" fill="#eaf3ec" stroke="#3a8f5a" stroke-width="2"/>
     <text x="1450" y="118" font-weight="bold" fill="#1f5c37">TextGenerator</text>
-    <text x="1450" y="148" font-size="12.5" fill="#333">chosen action &#8594;</text>
-    <text x="1450" y="166" font-size="12.5" fill="#333">coach-readable plan</text>
-    <text x="1450" y="188" font-size="11.5" fill="#666">+ coverage caveat</text>
+    <text x="1450" y="148" font-size="12.5" font-weight="600" fill="#222">chosen action &#8594;</text>
+    <text x="1450" y="166" font-size="12.5" font-weight="600" fill="#222">coach-readable plan</text>
+    <text x="1450" y="188" font-size="11.5" font-weight="600" fill="#555">+ coverage caveat</text>
   </g>
 
   <g stroke="#555555" stroke-width="2.2" marker-end="url(#arrow2)">
